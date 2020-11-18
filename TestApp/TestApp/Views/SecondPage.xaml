@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestApp.Views.SecondPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="Default">
+                <Frame BackgroundColor="Green"></Frame>
+            </ControlTemplate>
+            <ControlTemplate x:Key="Hide">
+                <ContentView HeightRequest="0"></ContentView></ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+    <Grid RowDefinitions="*,*,*">
+        <Label Grid.Row="0" Text="Test" BackgroundColor="Wheat"></Label>
+        <Button Grid.Row="2" Text="Click" Command="{Binding ClickCommand}"></Button>
+        <ContentView Grid.Row="1" ControlTemplate="{DynamicResource Default}">
+            <ContentView.Triggers>
+                <DataTrigger TargetType="ContentView" Binding="{Binding IsHiding}" Value="True">
+                    <Setter Property="ControlTemplate" Value="{DynamicResource Hide}"></Setter>
+                </DataTrigger>
+            </ContentView.Triggers>
+        </ContentView>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

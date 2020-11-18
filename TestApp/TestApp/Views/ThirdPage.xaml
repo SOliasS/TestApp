@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Name="CurrentPage"
+             x:Class="TestApp.Views.ThirdPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,*,*">
+            <Label Grid.Row="0" Text="Test" BackgroundColor="Wheat"></Label>
+            <Button Grid.Row="2" Text="Click" Command="{Binding ClickCommand}"></Button>
+            <CollectionView Grid.Row="1"  x:Name="MyListView"
+                            ItemsSource="{Binding ActiveTodos}"
+                            SelectedItem="{Binding Selected}"
+                            IsGrouped="True"
+                            SelectionMode="Single" 
+                            ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Grid
+                                        Margin="0"
+                                        Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                          
+                            <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"                                           
+                                            Text="Group"
+                                TextColor="BlanchedAlmond"
+                                            VerticalTextAlignment="Center" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference CurrentPage}, Path=BindingContext.SelectionCommand}" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView HeightRequest="{Binding CellHeight}"
+                                        IsEnabled="{Binding IsDisplayed}"
+                                        IsVisible="{Binding IsDisplayed}"
+                                       >
+                            <StackLayout>
+                                <Label Text="{Binding Title}"></Label>
+                                <Frame  
+                                            BackgroundColor="Green">
+                                </Frame>
+                            </StackLayout>
+
+
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

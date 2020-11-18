@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestApp.Views.FirstPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,*,*">
+            <Label Grid.Row="0" Text="Test" BackgroundColor="Wheat"></Label>
+            <Button Grid.Row="2" Text="Click" Command="{Binding ClickCommand}"></Button>
+            <CollectionView Grid.Row="1"  x:Name="MyListView"
+                            ItemsSource="{Binding Display}"
+                            SelectedItem="{Binding Selected}"
+                            SelectionMode="Single" 
+                            ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView
+                                        Margin="2"
+                                        Padding="2"
+                                       >
+                            <StackLayout>
+                                <Label Text="{Binding Title}"></Label>
+                                <Frame  HeightRequest="{Binding CellHeight}"
+                                        IsEnabled="{Binding IsDisplayed}"
+                                        IsVisible="{Binding IsDisplayed}"
+                                            Margin="5"
+                                            Padding="5,0,0,0"
+                                            BackgroundColor="Green">
+                                 </Frame>
+                            </StackLayout>
+                         
+                           
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
